@@ -127,7 +127,39 @@ webrtc_streamer(
 <img width="1912" height="973" alt="Screenshot 2025-08-04 182044" src="https://github.com/user-attachments/assets/0efb1bfb-7436-4571-8e74-8fa8fec0b616" />
 
 ### **🔹 Project 2: Image Filters App**  
-**Goal:** Apply filters (blur, edge, grayscale) to an image.  
+**Goal:** Apply filters (blur, edge, grayscale) to an image. 
+```python
+import cv2
+import numpy as np
+import streamlit as st
+
+st.title("Image Filters App")
+st.write("Upload an image and apply filters (blur, edge, grayscale).")
+
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    img = cv2.imdecode(file_bytes, 1)
+    st.image(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), caption='Original Image', use_column_width=True)
+
+    filter_type = st.selectbox("Choose a filter", ["None", "Grayscale", "Blur", "Edge Detection"])
+
+    if filter_type == "Grayscale":
+        filtered = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        st.image(filtered, caption='Grayscale Image', use_column_width=True, channels="GRAY")
+    elif filter_type == "Blur":
+        filtered = cv2.GaussianBlur(img, (15, 15), 0)
+        st.image(cv2.cvtColor(filtered, cv2.COLOR_BGR2RGB), caption='Blurred Image', use_column_width=True)
+    elif filter_type == "Edge Detection":
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        edges = cv2.Canny(gray, 100, 200)
+        st.image(edges, caption='Edge Detection', use_column_width=True, channels="GRAY")
+```
+<img width="1912" height="972" alt="image" src="https://github.com/user-attachments/assets/d72d98b6-a94c-46aa-898f-91e18881d545" />
+<img width="1919" height="967" alt="image" src="https://github.com/user-attachments/assets/598e221a-87cc-40e5-b8fb-b0d38ea71a69" />
+<img width="1919" height="960" alt="image" src="https://github.com/user-attachments/assets/a7aea9a1-73fc-4865-8bbd-7d6c7363caaa" />
+<img width="1916" height="970" alt="image" src="https://github.com/user-attachments/assets/b990cffa-10bc-4a95-902e-99592f77147c" />
 
 ### **🔹 Project 3: Simple Motion Detector**  
 **Goal:** Detect movement using background subtraction.  

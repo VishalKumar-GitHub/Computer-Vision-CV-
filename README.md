@@ -18,7 +18,7 @@ Welcome to **Computer Vision (CV)**  This guide will take you from **absolute be
 🔹 **Try this:**  
 ```python
 import cv2  
-img = cv2.imread("image.jpg")  
+img = cv2.imread("image.png")  
 print(img.shape)  # (height, width, channels)  
 ```
 
@@ -34,7 +34,7 @@ print(img.shape)  # (height, width, channels)
 ### **1️ Load & Display Images**  
 ```python
 import cv2  
-img = cv2.imread("dog.jpg")  
+img = cv2.imread("dog.png")  
 cv2.imshow("Dog Image", img)  
 cv2.waitKey(0)  # Press any key to close  
 ```

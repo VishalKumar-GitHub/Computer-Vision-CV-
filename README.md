@@ -18,9 +18,10 @@ Welcome to **Computer Vision (CV)**  This guide will take you from **absolute be
 🔹 **Try this:**  
 ```python
 import cv2  
-img = cv2.imread("image.png")  
+img = cv2.imread("dog.png")  
 print(img.shape)  # (height, width, channels)  
 ```
+<img width="979" height="37" alt="image" src="https://github.com/user-attachments/assets/86716b81-dd8c-4535-ac80-d86acf8b6bc8" />
 
 ### **2️ Install Key Tools**  
 - **Python** (3.8+)  

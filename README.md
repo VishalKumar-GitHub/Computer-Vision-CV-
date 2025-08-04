@@ -100,23 +100,31 @@ print("Predicted:", prediction)
 ### **🔹 Project 1: Live Face Detection**  
  **Goal:** Use your webcam to detect faces in real-time.  
 ```python
-cap = cv2.VideoCapture(0)  # Webcam  
+import cv2
+import streamlit as st
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
-while True:  
-    ret, frame = cap.read()  
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)  
-    
-    for (x, y, w, h) in faces:  
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)  
-    
-    cv2.imshow("Live Face Detection", frame)  
-    if cv2.waitKey(1) == ord('q'):  # Press 'q' to quit  
-        break  
+# Load the pre-trained Haar Cascade classifier for face detection
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-cap.release()  
-cv2.destroyAllWindows()  
+class FaceDetectionTransformer(VideoTransformerBase):
+    def transform(self, frame):
+        img = frame.to_ndarray(format="bgr24")
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        for (x, y, w, h) in faces:
+            cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+        return img
+
+st.title("Live Face Detection with Streamlit")
+
+webrtc_streamer(
+    key="face-detect",
+    video_transformer_factory=FaceDetectionTransformer,
+    media_stream_constraints={"video": True, "audio": False}
+)
 ```
+<img width="1912" height="973" alt="Screenshot 2025-08-04 182044" src="https://github.com/user-attachments/assets/0efb1bfb-7436-4571-8e74-8fa8fec0b616" />
 
 ### **🔹 Project 2: Image Filters App**  
 **Goal:** Apply filters (blur, edge, grayscale) to an image.  

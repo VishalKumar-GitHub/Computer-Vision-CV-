@@ -143,7 +143,7 @@ cv2.destroyAllWindows()
 - **Intermediate Level:** CNNs, YOLO, Object Detection.  
 - **Advanced Level:** Transformers, GANs, Deployment.  
 
-=====================================Intermediate Level===========================================
+=========================Intermediate Level==============================
 ### Intermediate Computer Vision Guide
 
 #### Core Skills to Master:
@@ -259,8 +259,7 @@ async def detect_objects(file: UploadFile):
 - Experiment with 3D vision (point clouds)
 - Dive into MLOps for CV
 
-=====================================Advanced Level===========================================
-
+=========================Advanced Level==================================
 ### Advanced Computer Vision Mastery
 
 #### Cutting-Edge Concepts:

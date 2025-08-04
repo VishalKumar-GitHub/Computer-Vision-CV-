@@ -1,6 +1,6 @@
 #                                                                     **Computer-Vision (CV)**
 
-# **Beginner Level** - **Intermediate Level:** - **Advanced Level**
+**Beginner Level** - **Intermediate Level:** - **Advanced Level**
 
 =====================================Beginner Level===========================================
 

@@ -38,6 +38,7 @@ img = cv2.imread("dog.jpg")
 cv2.imshow("Dog Image", img)  
 cv2.waitKey(0)  # Press any key to close  
 ```
+<img width="894" height="742" alt="image" src="https://github.com/user-attachments/assets/6a40b76e-767e-4e2f-ab25-3acad6c3cee5" />
 
 ### **2️ Convert to Grayscale**  
 ```python
@@ -45,6 +46,7 @@ gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 cv2.imshow("Gray Dog", gray_img)  
 cv2.waitKey(0)  
 ```
+<img width="898" height="730" alt="image" src="https://github.com/user-attachments/assets/9e65dff3-361a-4608-843f-e2da74b67b21" />
 
 ### **3️ Edge Detection (Canny Edge)**  
 ```python
@@ -52,6 +54,7 @@ edges = cv2.Canny(gray_img, 100, 200)  # Min & Max thresholds
 cv2.imshow("Edges", edges)  
 cv2.waitKey(0)  
 ```
+<img width="901" height="744" alt="image" src="https://github.com/user-attachments/assets/252a2e2c-91e5-41f0-9b36-b2d6c5efd511" />
 
 ### **4️ Face Detection (Haar Cascades)**  
 ```python

@@ -139,7 +139,7 @@ cv2.destroyAllWindows()
 
 ---
 
-### ** What’s Next?**  
+### What’s Next?
 - **Intermediate Level:** CNNs, YOLO, Object Detection.  
 - **Advanced Level:** Transformers, GANs, Deployment.  
 

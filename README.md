@@ -1,10 +1,10 @@
 #                                                                     **Computer-Vision (CV)**
 
 **Beginner Level** - **Intermediate Level:** - **Advanced Level**
-
+---
 =====================================Beginner Level===========================================
-
-Welcome to **Computer Vision (CV)!**  This guide will take you from **absolute beginner** to building your first CV projects.  
+---
+Welcome to **Computer Vision (CV)**  This guide will take you from **absolute beginner** to building your first CV projects.  
 
 ---
 

@@ -4,9 +4,6 @@
 
 =========================Beginner Level==================================
 
-markdown
-![Beginner CV](https://i.imgur.com/JKbQe0E.png)
-
 Welcome to **Computer Vision (CV)**  This guide will take you from **absolute beginner** to building your first CV projects.  
 
 ---

@@ -67,6 +67,7 @@ for (x, y, w, h) in faces:
 cv2.imshow("Faces Detected", img)  
 cv2.waitKey(0)  
 ```
+<img width="900" height="750" alt="image" src="https://github.com/user-attachments/assets/9122d8cf-a6f6-4805-8aba-339ed23c1caa" />
 
 ---
 

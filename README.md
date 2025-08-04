@@ -1,6 +1,6 @@
 #                                                                     **Computer-Vision (CV)**
 
-# **Beginner Level Computer Vision: Your Step-by-Step Guide**  
+# ...............................................**Beginner Level Computer Vision: Your Step-by-Step Guide**  
 
 Welcome to **Computer Vision (CV)!**  This guide will take you from **absolute beginner** to building your first CV projects.  
 

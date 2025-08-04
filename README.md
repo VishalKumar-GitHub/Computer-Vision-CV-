@@ -163,6 +163,38 @@ if uploaded_file is not None:
 
 ### **🔹 Project 3: Simple Motion Detector**  
 **Goal:** Detect movement using background subtraction.  
+```python
+import cv2
+import numpy as np
+import streamlit as st
+
+st.title("Simple Motion Detector")
+st.write("Upload a video to detect motion using background subtraction.")
+
+uploaded_file = st.file_uploader("Choose a video...", type=["mp4", "avi", "mov"])
+
+if uploaded_file is not None:
+    tfile = open("temp_video.mp4", "wb")
+    tfile.write(uploaded_file.read())
+    tfile.close()
+
+    cap = cv2.VideoCapture("temp_video.mp4")
+    fgbg = cv2.createBackgroundSubtractorMOG2()
+
+    stframe = st.empty()
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+        fgmask = fgbg.apply(frame)
+        # Highlight motion in red on the original frame
+        motion = cv2.bitwise_and(frame, frame, mask=fgmask)
+        display = cv2.addWeighted(frame, 0.7, motion, 0.7, 0)
+        stframe.image(cv2.cvtColor(display, cv2.COLOR_BGR2RGB), channels="RGB", use_column_width=True)
+    cap.release()
+```
+<img width="1919" height="726" alt="image" src="https://github.com/user-attachments/assets/e492850d-f7d7-47b3-9ecd-017749e943db" />
 
 ---
 

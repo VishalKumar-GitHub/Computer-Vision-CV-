@@ -1,7 +1,8 @@
 #                                                                     **Computer-Vision (CV)**
 
-# **Beginner Level  Your Step-by-Step Guide**  
+# **Beginner Level** - **Intermediate Level:** - **Advanced Level**
 
+================================================Beginner Level=================================================================
 Welcome to **Computer Vision (CV)!**  This guide will take you from **absolute beginner** to building your first CV projects.  
 
 ---
@@ -141,7 +142,7 @@ cv2.destroyAllWindows()
 - **Intermediate Level:** CNNs, YOLO, Object Detection.  
 - **Advanced Level:** Transformers, GANs, Deployment.  
 
-**Want project code samples or more details? Ask below!** 👇 😊
+================================================Intermediate Level=================================================================
 ---
 Here's a clean, non-GitHub formatted intermediate computer vision guide that you can use anywhere:
 
@@ -260,9 +261,8 @@ async def detect_objects(file: UploadFile):
 - Experiment with 3D vision (point clouds)
 - Dive into MLOps for CV
 
-Would you like me to focus on any particular area in more detail?
----
-Here's an advanced computer vision guide in normal text format (non-GitHub):
+
+================================================Advanced Level=================================================================
 
 ### Advanced Computer Vision Mastery
 
@@ -398,5 +398,3 @@ outputs = model(**inputs)
 2. Autonomous Vehicles Perception Engineer
 3. AR/VR Computer Vision Specialist
 4. Generative AI Engineer
-
-Would you like me to elaborate on any specific advanced topic or provide implementation details for a particular architecture?

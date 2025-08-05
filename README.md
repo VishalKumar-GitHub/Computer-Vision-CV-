@@ -258,14 +258,46 @@ model = models.resnet18(pretrained=True)
 model.fc = nn.Linear(model.fc.in_features, 10)  # for 10-class problem
 ```
 
-2. **YOLOv8 Object Detection**
+2. **YOLOv8 Object Detection App**
 ```python
+import streamlit as st
 from ultralytics import YOLO
+import numpy as np
+from PIL import Image
 
-model = YOLO('yolov8n.pt')  # Load nano version
-results = model.predict('image.jpg')  # Run inference
-results[0].show()  # Display results
+st.title("YOLOv8 Object Detection App")
+
+# Load YOLOv8 model (downloads weights if not present)
+@st.cache_resource
+def load_model():
+    return YOLO('yolov8n.pt')  # You can use 'yolov8s.pt', 'yolov8m.pt', etc.
+
+model = load_model()
+
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    image = Image.open(uploaded_file).convert("RGB")
+    img_array = np.array(image)
+
+    # Run YOLOv8 inference
+    results = model(img_array)
+
+    # Draw boxes on the image
+    result_img = results[0].plot()  # Draws boxes and labels
+
+    st.image(result_img, caption="Detected Objects", use_container_width=True)
+
+    # Show detected classes and confidences
+    st.subheader("Detections:")
+    for box in results[0].boxes:
+        cls = model.model.names[int(box.cls)]
+        conf = float(box.conf)
+        st.write(f"Class: {cls}, Confidence: {conf:.2f}")
+        
 ```
+<img width="1919" height="975" alt="image" src="https://github.com/user-attachments/assets/b7b031bd-8c99-4f7a-b0e5-d178cf145459" />
+
 
 3. **Image Augmentation**
 ```python

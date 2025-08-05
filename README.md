@@ -299,18 +299,47 @@ if uploaded_file is not None:
 <img width="1919" height="975" alt="image" src="https://github.com/user-attachments/assets/b7b031bd-8c99-4f7a-b0e5-d178cf145459" />
 
 
-3. **Image Augmentation**
+3. **Image Augmentation App with Albumentations**
+   
+Image augmentation is the process of creating new training images from existing ones by applying random transformations (like rotation, flipping, or brightness changes).
+It helps improve model robustness by exposing it to more diverse data.
 ```python
+import streamlit as st
+import numpy as np
+import cv2
+from PIL import Image
 import albumentations as A
 
-transform = A.Compose([
-    A.RandomRotate90(),
-    A.Flip(),
-    A.RandomBrightnessContrast(),
-    A.Normalize()
-])
-augmented = transform(image=image)['image']
+st.title("Image Augmentation App with Albumentations")
+
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    image = Image.open(uploaded_file).convert("RGB")
+    img_array = np.array(image)
+
+    # Define the augmentation pipeline
+    transform = A.Compose([
+        A.RandomRotate90(),
+        A.HorizontalFlip(),  # Use HorizontalFlip instead of Flip
+        A.RandomBrightnessContrast(),
+        A.Normalize()
+    ])
+
+    augmented = transform(image=img_array)['image']
+
+    # Albumentations Normalize outputs float32, convert to uint8 for display
+    aug_disp = (augmented * 255).clip(0, 255).astype(np.uint8)
+
+    st.subheader("Original Image")
+    st.image(image, use_container_width=True)
+
+    st.subheader("Augmented Image")
+    st.image(aug_disp, use_container_width=True)
 ```
+<img width="1914" height="971" alt="Screenshot 2025-08-05 165750" src="https://github.com/user-attachments/assets/c8bc264f-9f42-46c1-a63e-e957d53bbc5f" />
+<img width="1913" height="970" alt="Screenshot 2025-08-05 165804" src="https://github.com/user-attachments/assets/b6e779d4-c925-4333-b34f-bf7a4720282b" />
+<img width="1919" height="966" alt="Screenshot 2025-08-05 165827" src="https://github.com/user-attachments/assets/0b0e4d9c-efe2-4aa4-ab52-52729f044195" />
 
 #### Project Ideas:
 

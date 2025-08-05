@@ -223,7 +223,122 @@ if uploaded_file is not None:
 - **Advanced Level:** Transformers, GANs, Deployment.  
 
 =========================Intermediate Level==============================
+### Intermediate Computer Vision Guide
 
+#### Core Skills to Master:
+1. **Deep Learning with CNNs**
+   - Architectures: ResNet, EfficientNet, MobileNet
+   - Transfer learning techniques
+   - Custom model training
+
+2. **Object Detection**
+   - YOLO (v5/v8) implementation
+   - Faster R-CNN basics
+   - COCO dataset handling
+
+3. **Image Segmentation**
+   - U-Net architectures
+   - Mask R-CNN
+   - Medical imaging applications
+
+4. **Model Optimization**
+   - Quantization (FP32 → INT8)
+   - Pruning techniques
+   - ONNX/TensorRT conversion
+
+#### Practical Code Examples:
+
+1. **Transfer Learning with ResNet**
+```python
+import torchvision.models as models
+import torch.nn as nn
+
+model = models.resnet18(pretrained=True)
+# Replace final layer
+model.fc = nn.Linear(model.fc.in_features, 10)  # for 10-class problem
+```
+
+2. **YOLOv8 Object Detection**
+```python
+from ultralytics import YOLO
+
+model = YOLO('yolov8n.pt')  # Load nano version
+results = model.predict('image.jpg')  # Run inference
+results[0].show()  # Display results
+```
+
+3. **Image Augmentation**
+```python
+import albumentations as A
+
+transform = A.Compose([
+    A.RandomRotate90(),
+    A.Flip(),
+    A.RandomBrightnessContrast(),
+    A.Normalize()
+])
+augmented = transform(image=image)['image']
+```
+
+#### Project Ideas:
+
+1. **Smart Surveillance System**
+   - Detect people/objects in real-time
+   - Count objects in video feeds
+   - Trigger alerts for specific events
+
+2. **Medical Image Analyzer**
+   - X-ray classification
+   - Tumor segmentation in MRI scans
+   - Dental cavity detection
+
+3. **Retail Analytics**
+   - Shelf product detection
+   - Customer movement tracking
+   - Automated checkout system
+
+#### Evaluation Metrics:
+
+| Task          | Key Metrics                  |
+|---------------|-----------------------------|
+| Classification| Accuracy, F1-score, ROC-AUC |
+| Detection     | mAP, IoU                    |
+| Segmentation  | Dice Coefficient, IoU       |
+
+#### Deployment Options:
+
+1. **Web API (FastAPI)**
+```python
+@app.post("/detect")
+async def detect_objects(file: UploadFile):
+    image = process_image(await file.read())
+    results = model(image)
+    return {"objects": results}
+```
+
+2. **Mobile Deployment**
+   - Convert to TFLite for Android
+   - Core ML for iOS
+   - ONNX runtime for cross-platform
+
+3. **Edge Devices**
+   - NVIDIA Jetson implementation
+   - Raspberry Pi with Coral TPU
+
+#### Recommended Learning Path:
+1. Master PyTorch/TensorFlow
+2. Practice with public datasets (COCO, ImageNet)
+3. Implement 2-3 complete projects
+4. Learn optimization techniques
+5. Study deployment pipelines
+
+#### Next Steps:
+- Explore transformer architectures (ViT, SWIN)
+- Learn about multi-modal models (CLIP)
+- Experiment with 3D vision (point clouds)
+- Dive into MLOps for CV
+
+=========================Advanced Level==================================
 
 -
 -

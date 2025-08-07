@@ -347,6 +347,63 @@ if uploaded_file is not None:
    - Detect people/objects in real-time
    - Count objects in video feeds
    - Trigger alerts for specific events
+```python
+import streamlit as st
+from ultralytics import YOLO
+import cv2
+import numpy as np
+from PIL import Image
+
+st.title("Smart Surveillance System")
+
+# Load YOLOv8 model
+@st.cache_resource
+def load_model():
+    return YOLO('yolov8n.pt')
+
+model = load_model()
+
+uploaded_file = st.file_uploader("Lade ein Video hoch", type=["mp4", "avi", "mov"])
+
+alert_class = st.selectbox("Wähle eine Klasse für Alarmierung", ["person", "car", "bicycle", "dog", "cat"])
+
+if uploaded_file is not None:
+    tfile = open("temp_video.mp4", "wb")
+    tfile.write(uploaded_file.read())
+    tfile.close()
+
+    cap = cv2.VideoCapture("temp_video.mp4")
+    stframe = st.empty()
+
+    alert_triggered = False
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        results = model(frame)
+        boxes = results[0].boxes
+        labels = [model.model.names[int(box.cls)] for box in boxes]
+        count = labels.count(alert_class)
+
+        # Draw boxes and labels
+        result_img = results[0].plot()
+
+        # Show frame
+        stframe.image(result_img, channels="BGR", use_container_width=True)
+        st.write(f"Anzahl '{alert_class}': {count}")
+
+        # Trigger alert if class detected
+        if count > 0 and not alert_triggered:
+            st.warning(f"ALARM: '{alert_class}' erkannt!")
+            alert_triggered = True
+
+    cap.release()
+```
+<img width="1914" height="971" alt="image" src="https://github.com/user-attachments/assets/89ab08be-d1ef-4652-ba6a-8639387254f9" />
+<img width="1911" height="976" alt="image" src="https://github.com/user-attachments/assets/571e11ec-4211-45dd-be89-4771c4201cd5" />
+
 
 2. **Medical Image Analyzer**
    - X-ray classification

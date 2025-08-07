@@ -409,6 +409,45 @@ if uploaded_file is not None:
    - X-ray classification
    - Tumor segmentation in MRI scans
    - Dental cavity detection
+```python
+import streamlit as st
+from PIL import Image
+import numpy as np
+
+st.title("Medical Image Analyzer")
+
+tab1, tab2, tab3 = st.tabs(["X-ray Klassifikation", "Tumor-Segmentierung (MRT)", "Karieserkennung (Zahn)"])
+
+with tab1:
+    st.header("X-ray Klassifikation")
+    xray_file = st.file_uploader("Lade ein Röntgenbild hoch", type=["jpg", "jpeg", "png"], key="xray")
+    if xray_file:
+        image = Image.open(xray_file).convert("RGB")
+        st.image(image, caption="Röntgenbild", use_container_width=True)
+        # TODO: Replace with your model inference
+        st.info("Vorhersage: Pneumonie (Beispiel)")
+
+with tab2:
+    st.header("Tumor-Segmentierung in MRT-Scans")
+    mri_file = st.file_uploader("Lade einen MRT-Scan hoch", type=["jpg", "jpeg", "png"], key="mri")
+    if mri_file:
+        image = Image.open(mri_file).convert("RGB")
+        st.image(image, caption="MRT-Scan", use_container_width=True)
+        # TODO: Replace with your segmentation model
+        st.info("Segmentiertes Tumorgebiet hervorgehoben (Beispiel)")
+
+with tab3:
+    st.header("Karieserkennung auf Zahnaufnahmen")
+    dental_file = st.file_uploader("Lade ein Zahnfoto hoch", type=["jpg", "jpeg", "png"], key="dental")
+    if dental_file:
+        image = Image.open(dental_file).convert("RGB")
+        st.image(image, caption="Zahnaufnahme", use_container_width=True)
+        # TODO: Replace with your cavity detection model
+        st.info("Karies erkannt: Ja (Beispiel)")
+```
+<img width="1918" height="972" alt="image" src="https://github.com/user-attachments/assets/b2e42326-a7f9-4ad0-9046-d6d0195e48cb" />
+<img width="1917" height="965" alt="image" src="https://github.com/user-attachments/assets/05da3114-7bbb-491a-962b-f117f2a185e2" />
+<img width="1914" height="974" alt="image" src="https://github.com/user-attachments/assets/e5720a45-2753-4699-8571-27f076cb352d" />
 
 3. **Retail Analytics**
    - Shelf product detection

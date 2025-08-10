@@ -453,6 +453,94 @@ with tab3:
    - Shelf product detection
    - Customer movement tracking
    - Automated checkout system
+  
+4. **Invisible Cloak Project (Harry Potter Style)**
+
+A fun and educational computer vision project that creates the illusion of invisibility using real-world tech.
+
+### Tech Stack
+- OpenCV – Real-time video processing
+- Python – Core programming language
+- NumPy – Efficient array handling
+- Webcam – Live feed capture
+- Color Detection & Masking – Hide the cloak
+- VS Code – Testing & experimentation
+
+### How It Works
+Detects a red cloth in real time and replaces it with the background using color segmentation, making it appear invisible.
+
+### Skills Gained
+- Real-time video processing
+- Image masking
+- Object tracking
+- Problem-solving & debugging
+```python
+import cv2
+import numpy as np
+
+print("Starting Invisible Cloak...")
+
+cap = cv2.VideoCapture(0)
+cv2.namedWindow("Invisible Cloak")
+
+# Allow the camera to warm up and capture the background
+for i in range(30):
+    ret, background = cap.read()
+    if not ret:
+        continue
+background = np.flip(background, axis=1)
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+    frame = np.flip(frame, axis=1)
+
+    # Convert to HSV
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    # Define red color range (adjust as needed)
+    lower_red1 = np.array([0, 120, 70])
+    upper_red1 = np.array([10, 255, 255])
+    lower_red2 = np.array([170, 120, 70])
+    upper_red2 = np.array([180, 255, 255])
+
+    mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+    mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+    mask = mask1 + mask2
+
+    # Morphological operations to clean up the mask
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3,3), np.uint8), iterations=2)
+    mask = cv2.dilate(mask, np.ones((3,3), np.uint8), iterations=1)
+    inverse_mask = cv2.bitwise_not(mask)
+
+    # Segment out the cloak and replace with background
+    cloak_area = cv2.bitwise_and(background, background, mask=mask)
+    non_cloak_area = cv2.bitwise_and(frame, frame, mask=inverse_mask)
+    final = cv2.addWeighted(cloak_area, 1, non_cloak_area, 1, 0)
+
+    cv2.imshow("Invisible Cloak", final)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+
+
+
+    # Segment out the cloak and replace with background
+cloak_area = cv2.bitwise_and(background, background, mask=mask)
+non_cloak_area = cv2.bitwise_and(frame, frame, mask=inverse_mask)
+final = cv2.addWeighted(cloak_area, 1, non_cloak_area, 1, 0)
+
+
+
+    # Segment out the cloak and replace with background
+cloak_area = cv2.bitwise_and(background, background, mask=mask)
+non_cloak_area = cv2.bitwise_and(frame, frame, mask=inverse_mask)
+final = cv2.add(cloak_area, non_cloak_area)
+```
+<img width="1087" height="816" alt="image" src="https://github.com/user-attachments/assets/acaa47f9-3b59-43c2-805b-f3ef0f0a90ac" />
+<img width="1084" height="776" alt="Screenshot 2025-08-10 085947" src="https://github.com/user-attachments/assets/04ecb15c-6998-452a-8839-00c2f3d8f531" />
 
 #### Evaluation Metrics:
 
